@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoHealth Dengue Presentation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Poppins', sans-serif; overflow: hidden; }
+.slide { display: none; }
+.active { display: flex; }
+.fade-in { animation: fadeIn 1s ease-in-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-700 text-white">
+
+<div id="slides" class="w-screen h-screen flex items-center justify-center">
+
+<!-- Slide Template -->
+<div class="slide active flex-col items-center justify-center text-center px-10 fade-in">
+  <h1 class="text-5xl font-bold mb-6">Software Defect Analysis</h1>
+  <h2 class="text-2xl mb-4">EcoHealth Dengue Outbreak Predictor</h2>
+  <p class="text-lg">G. B. Darsha Anuradha</p>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">System Overview</h1>
+  <ul class="space-y-4 text-lg">
+    <li>Predictive web-based surveillance system</li>
+    <li>Risk Engine (14–28 day lag, score 0–100)</li>
+    <li>Users: Health Officers, Hospitals, Government</li>
+    <li>Tech: Python, Django, SQLite, Tailwind, Chart.js</li>
+  </ul>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">Identified Defects</h1>
+  <ul class="space-y-4 text-lg">
+    <li>Security: Unauthorized district data modification</li>
+    <li>Logic: Incorrect rainfall time-lag calculation</li>
+    <li>Performance: Crash on API timeout</li>
+  </ul>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">Defect Analysis</h1>
+  <p class="text-lg mb-4">Missing authorization validation</p>
+  <p class="text-lg mb-4">User district not verified</p>
+  <p class="text-lg">Impact: Critical data integrity issue</p>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">Test Case</h1>
+  <ul class="space-y-4 text-lg">
+    <li>Login as District A clerk</li>
+    <li>Try submitting data to District B</li>
+    <li>Expected: Block access</li>
+    <li>Actual: Data saved (BUG)</li>
+  </ul>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">Test Improvements</h1>
+  <ul class="space-y-4 text-lg">
+    <li>Automation with Selenium</li>
+    <li>Boundary testing (0–100)</li>
+    <li>Simulate API failures</li>
+  </ul>
+</div>
+
+<div class="slide flex-col items-start justify-center px-20 fade-in">
+  <h1 class="text-4xl font-semibold mb-6">Tools & Techniques</h1>
+  <ul class="space-y-4 text-lg">
+    <li>Manual Testing</li>
+    <li>Unit Testing</li>
+    <li>JIRA Bug Tracking</li>
+    <li>CI/CD Pipelines</li>
+  </ul>
+</div>
+
+<div class="slide flex-col items-center justify-center text-center px-10 fade-in">
+  <h1 class="text-5xl font-bold mb-6">Conclusion</h1>
+  <p class="text-lg max-w-2xl">Critical defects found in security, logic, and performance. Strong testing ensures reliable outbreak prediction and better healthcare decisions.</p>
+</div>
+
+</div>
+
+<!-- Navigation -->
+<div class="fixed bottom-5 w-full flex justify-center gap-4">
+  <button onclick="prevSlide()" class="bg-white text-black px-4 py-2 rounded">Prev</button>
+  <button onclick="nextSlide()" class="bg-white text-black px-4 py-2 rounded">Next</button>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    if (i === index) {
+      slide.classList.add('active');
+    }
+  });
+}
+
+function nextSlide() {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}
+
+function prevSlide() {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+}
+
+// Keyboard support
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
+</script>
+
+</body>
+</html>
